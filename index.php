@@ -3,8 +3,11 @@ $config = include "../Dbconf.php";
 echo "대림대학교";
 print_r($config);
 
-require "database.php";
-require "Table.php";
+require "../Loading.php";
+
+$db = new Database($config);
+// require "database.php";
+// require "Table.php";
 $query = "SHOW TABLES";
         $result  = $db->queryExecute($query);
 
