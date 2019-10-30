@@ -1,7 +1,7 @@
 <?php
 
 
-
+namespace Module\Database;
 
 //선언
 class Table
@@ -10,7 +10,7 @@ class Table
     public $Database;
     public function __construct($database)
     {
-        echo "테이블 클래스 생성";
+        //echo "테이블 클래스 생성";
         $this->Database = $database;
     }
 
