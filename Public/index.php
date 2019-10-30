@@ -6,6 +6,7 @@ $uri = $_SERVER['REQUEST_URI'];
 $uris = explode("/", $uri);
 // print_r($uris);
 
+
 $db = new \Module\Database\Database($config);
 // 배열이 있나 확인후 배열에 값이 있나 확인
 if($uris[1] && $uris[1]){
