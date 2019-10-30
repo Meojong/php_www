@@ -1,26 +1,25 @@
 <?php
 $config = include "../Dbconf.php";
-//echo "대림대학교";
-//print_r($config);
-
 require "../Loding.php";
 
+$uri = $_SERVER['REQUEST_URI'];
+$uris = explode("/", $uri);
+print_r($uris);
+
 $db = new \Module\Database\Database($config);
-// require "database.php";
-// require "Table.php";
-$query = "SHOW TABLES";
-        $result  = $db->queryExecute($query);
+// 배열이 있나 확인후 배열에 값이 있나 확인
+if($uris[1] && $uris[1]){
+    //컨트롤러 실행
+    echo $uris[1]."컨트롤러 실행";
+    $controllerName = "\App\Controller\\".ucfirst($uris[1]);
+    $tables = new $controllerName($db);
+    $tables->main();
+}else{
+    // 처음 페이지 에요
+    echo "처음 페이지 에요";
+    $body = file_get_contents("../Resource/index.html");
+    echo $body;
+}
 
-        $count = mysqli_num_rows($result);
-        $content = "";
-        for($i = 0; $i < $count; $i++){
-            $row = mysqli_fetch_object($result);
-            $content .= "<tr>";
-            $content .= "<td>$i</td>";
-            $content .= "<td>".$row->Tables_in_php."<br>"; 
-            $content .= "</tr>";
-        }
-
-$body = file_get_contents("../Resource/table.html");
-$body = str_replace("{{content}}", $content, $body);// 데이터 치환
-echo $body;
+// $desc = new \App\Controller\Tableinfo;
+// $desc->main();
